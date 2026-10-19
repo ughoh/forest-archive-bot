@@ -1,0 +1,46 @@
+[tool.poetry]
+name = "forest-mouse-bot"
+version = "1.0.0"
+description = "Telegram-бот «Мишка-шкряботушка»: RAG-асистент лісової громади (aiogram 3, Groq, ChromaDB)"
+authors = ["Forest Mouse Team <team@example.com>"]
+readme = "README.md"
+package-mode = false
+
+[[tool.poetry.source]]
+# Легка CPU-збірка PyTorch (без CUDA, у рази менша за стандартну з PyPI)
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+priority = "explicit"
+
+[tool.poetry.dependencies]
+python = ">=3.11,<3.13"
+# Telegram
+aiogram = "^3.13"
+# LLM
+groq = ">=0.11,<1.0"
+# RAG
+chromadb = ">=0.5.23,<0.7"
+sentence-transformers = "^3.0"
+langchain-text-splitters = ">=0.3,<1.0"
+torch = { version = ">=2.4,<3.0", source = "pytorch-cpu" }
+# Обробка документів
+pypdf = ">=4.3"
+python-docx = "^1.1"
+# Конфігурація та БД
+pydantic-settings = "^2.4"
+aiosqlite = "^0.20"
+# Google Drive
+gdown = "^5.2"
+# Часові пояси (Europe/Kyiv) у slim-образі
+tzdata = ">=2024.1"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.6"
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+
+[build-system]
+requires = ["poetry-core>=1.8"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,21 @@
+services:
+  bot:
+    build:
+      context: .
+    image: forest-mouse-bot:latest
+    container_name: forest-mouse-bot
+    restart: unless-stopped
+    init: true
+    stop_grace_period: 20s
+    env_file: .env
+    environment:
+      DATA_DIR: /app/data
+      TZ: Europe/Kyiv
+    volumes:
+      # БД SQLite, векторний індекс ChromaDB, файли та логи
+      - ./data:/app/data
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
